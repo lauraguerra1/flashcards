@@ -24,6 +24,9 @@ describe('deck', function() {
     expect(createDeck).to.be.a('function');
   })
   it('should create a deck of cards', function () {
+    const card1 = createCard(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
+    const card2 = createCard(2, 'What is Laura\'s Golden Retriever\'s name?', ['Jackson', 'Bruce', 'Ducky'], 'Jackson');
+    const deck = createDeck([card1, card2]);
     
     expect(deck.cards[0]).to.deep.equal(card1);
     expect(deck.cards[1]).to.deep.equal(card2);
