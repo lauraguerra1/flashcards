@@ -43,13 +43,48 @@ describe('round', function() {
     const card2 = createCard(2, 'What is Laura\'s Golden Retriever\'s name?', ['Jackson', 'Bruce', 'Ducky'], 'Jackson');
     const deck = createDeck([card1, card2]);
     const round = createRound(deck)
-    assert.equal(round.turn, 0)
+    assert.equal(round.turns, 0)
     assert.equal(round.currentCard, deck.cards[0])
   })
   it('should start with an empty list of incorrect guesses ', function() {
     const deck = createDeck(prototypeData);
     const round = createRound(deck);
     assert.deepEqual(round.incorrectGuesses, [])
+  })
+});
+
+describe('turn', function() {
+  it('should be a function', function() {
+    assert.isFunction(takeTurn);
+  })
+  it('should increment the round\'s turns and evaluate the guess', function () {
+    const card1 = createCard(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
+    const card2 = createCard(2, 'What is Laura\'s Golden Retriever\'s name?', ['Jackson', 'Bruce', 'Ducky'], 'Jackson');
+    const deck = createDeck([card1, card2]);
+    const round = createRound(deck);
+    assert.equal(round.turns, 0);
+
+    const feedback1 = takeTurn('object', round);
+    assert.equal(feedback1, 'correct!')
+    assert.equal(round.turns, 1);
+
+    const feedback2 = takeTurn('Bruce', round);
+    assert.equal(feedback2, 'incorrect!')
+    assert.equal(round.turns, 2);
+  })
+  it('should only keep track of incorrect guesses', function() {
+    const card1 = createCard(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
+    const card2 = createCard(2, 'What is Laura\'s Golden Retriever\'s name?', ['Jackson', 'Bruce', 'Ducky'], 'Jackson');
+    const deck = createDeck([card1, card2]);
+    const round = createRound(deck);
+    assert.equal(round.turns, 0);
+    assert.deepEqual(round.incorrectGuesses, [])
+
+    takeTurn('object', round);
+    assert.deepEqual(round.incorrectGuesses, []);
+
+    takeTurn('Bruce', round);
+    assert.deepEqual(round.incorrectGuesses, ['Bruce']);
   })
 });
 
