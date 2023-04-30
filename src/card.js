@@ -8,14 +8,13 @@ const createCard = (id, question, answers, correctAnswer) => {
 };
 
 const createDeck = (data) => {
-  return data.reduce((acc, curr, index) => {
-    acc[index] = curr;
-    return acc;
-  }, {});
+  return {
+    cards: data
+  }
 };
 
 const countCards = (deck) => {
-  const cardCount = Object.keys(deck).length;
+  const cardCount = deck.cards.length;
   return cardCount;
 }
 
