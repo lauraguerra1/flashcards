@@ -10,7 +10,8 @@ const {
   takeTurn, 
   endRound, 
   evaluateGuess, 
-  createRound 
+  createRound, 
+  calculatePercentCorrect
 } = require('../src/round');
 const { prototypeData } = require('../src/data');
 
@@ -87,4 +88,36 @@ describe('turn', function() {
     assert.deepEqual(round.incorrectGuesses, ['Bruce']);
   })
 });
+
+describe('percent correct calculation', function() {
+  it('should be two functions', function () {
+    assert.isFunction(calculatePercentCorrect);
+    assert.isFunction(endRound);
+  })
+  it('should find the percent of correct guesses', function() {
+    const deck = createDeck(prototypeData);
+    const round = createRound(deck);
+    takeTurn('object', round);
+    const percentCorrect1 = calculatePercentCorrect(round);
+    assert.deepEqual(round.incorrectGuesses, []);
+    assert.deepEqual(percentCorrect1, 100);
+
+    takeTurn('function', round);
+    const percentCorrect2 = calculatePercentCorrect(round);
+    assert.deepEqual(round.incorrectGuesses, ['function']);
+    assert.deepEqual(percentCorrect2, 50);
+
+    takeTurn('accessor method', round)
+    const percentCorrect3 = calculatePercentCorrect(round);
+    assert.deepEqual(round.incorrectGuesses, ['function', 'accessor method']);
+    assert.deepEqual(percentCorrect3, 33);
+  })
+  it('should announce the percent correct', function() {
+    const deck = createDeck(prototypeData);
+    const round = createRound(deck);
+    takeTurn('object', round);
+    const announcement = endRound(round);
+    assert.deepEqual(announcement, '** Round over! ** You answered 100% of the questions correctly!')
+  })
+})
 

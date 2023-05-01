@@ -26,9 +26,22 @@ const createRound = (deck) => {
     return feedback; 
   }
 
+const calculatePercentCorrect = (round) => {
+  const percentCorrect = Math.floor(100 - ((round.incorrectGuesses.length/round.turns) * 100));
+  return percentCorrect;
+}
+
+const endRound = (round) => {
+  const percentCorrect = calculatePercentCorrect(round);
+  const announcement = `** Round over! ** You answered ${percentCorrect}% of the questions correctly!`;
+  console.log(announcement);
+  return announcement;
+}
 
 module.exports = {
   evaluateGuess, 
   createRound,
-  takeTurn
+  takeTurn,
+  calculatePercentCorrect, 
+  endRound
 }
