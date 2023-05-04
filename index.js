@@ -7,17 +7,20 @@ const { printQuestion, printMessage } = require("./src/game");
 console.log('Your project is running...'); 
 
 const start = (data) => {
-  const cards = data.map((card, i ) => createCard(card.id = i, card.question, [...card['incorrect_answers'], card['correct_answer']], card['correct_answer']));
+  const cards = data.map((card) => createCard(card.id, card.question, card.answers, card.correctAnswer));
   const deck = createDeck(cards);
   const round = createRound(deck);
   printMessage(deck);
   printQuestion(round);
 }
-// start();
+// start(prototypeData);
 
-// let celebrityQuestions;
+
 fetch("https://opentdb.com/api.php?amount=30&category=26")
   .then(response => response.json())
-  .then((data) => start(data.results));
+  .then(data => {
+    const cards = data.results.map((trivia, i) => ({ id: i, question: trivia.question, answers: [...trivia.incorrect_answers, trivia.correct_answer].sort(), correctAnswer: trivia.correct_answer }))
+    start(cards);
+  })
 
-// console.log(celebrityQuestions)
+
