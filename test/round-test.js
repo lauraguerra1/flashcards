@@ -3,7 +3,7 @@ const assert = chai.assert;
 
 const { createCard } = require('../src/card');
 const {createDeck} = require('../src/deck')
-const { evaluateGuess, createRound} = require('../src/round');
+const { createRound } = require('../src/round');
 const sample = require('../src/sample-data');
 
 
@@ -16,15 +16,7 @@ describe('round', function() {
     this.round = createRound(this.deck);
   }) 
   it('should be a function', function () {
-    assert.isFunction(evaluateGuess);
     assert.isFunction(createRound);
-  })
-  it('should find correct and incorrect guesses', function () {
-    const correctGuess = evaluateGuess('object', this.card1.correctAnswer);
-    const incorrectGuess = evaluateGuess('array', this.card1.correctAnswer);
-  
-    assert.deepEqual(correctGuess, 'correct!');
-    assert.deepEqual(incorrectGuess, 'incorrect!')
   })
   it('should have a deck of cards', function () {
   assert.deepEqual(this.round.deck, [this.card1, this.card2, this.card3])
