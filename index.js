@@ -7,7 +7,7 @@ const { printQuestion, printMessage } = require("./src/game");
 console.log('Your project is running...'); 
 
 const start = (data) => {
-  const cards = data.map((card) => createCard(card.id, card.question, card.answers, card.correctAnswer));
+  const cards = data.map((card) => createCard(card.id, card.question, card.answers, card.correctAnswer)); 
   const deck = createDeck(cards);
   const round = createRound(deck);
   printMessage(deck);
@@ -19,7 +19,7 @@ const start = (data) => {
 fetch("https://opentdb.com/api.php?amount=30&category=26")
   .then(response => response.json())
   .then(data => {
-    const cards = data.results.map((trivia, i) => ({ id: i, question: trivia.question, answers: [...trivia.incorrect_answers, trivia.correct_answer].sort(), correctAnswer: trivia.correct_answer }))
+    const cards = data.results.map((trivia, i) => createCard(i, trivia.question, [...trivia.incorrect_answers, trivia.correct_answer].sort(), trivia.correct_answer))
     start(cards);
   })
 
