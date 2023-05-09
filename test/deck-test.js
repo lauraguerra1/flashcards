@@ -1,7 +1,8 @@
 const chai = require('chai');
 const assert = chai.assert;
 
-const { createCard, createDeck, countCards} = require('../src/card');
+const { createCard } = require('../src/card');
+const { createDeck, countCards } = require('../src/deck')
 const sample = require('../src/sample-data');
 
 describe('deck', function() {
