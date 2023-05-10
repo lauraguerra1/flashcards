@@ -1,6 +1,7 @@
 // This is where your project starts.
 const fetch = require('node-fetch');
-const { createCard, createDeck } = require("./src/card");
+const { createCard } = require("./src/card");
+const { createDeck } = require('./src/deck')
 const { createRound } = require("./src/round");
 const { prototypeData } = require("./src/data");
 const { printQuestion, printMessage } = require("./src/game");

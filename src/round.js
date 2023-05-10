@@ -1,10 +1,3 @@
-const evaluateGuess = (guess, correctAnswer) => {
-  if (guess === correctAnswer) {
-    return 'correct!';
-  } 
-  return 'incorrect!'
-}
-
 const createRound = (deck) => { 
   const round = {
     deck: deck.cards,
@@ -18,6 +11,5 @@ const createRound = (deck) => {
 }
 
 module.exports = {
-  evaluateGuess, 
   createRound,
 }

@@ -1,4 +1,9 @@
-const { evaluateGuess } = require('./round')
+const evaluateGuess = (guess, correctAnswer) => {
+  if (guess === correctAnswer) {
+    return 'correct!';
+  } 
+  return 'incorrect!'
+}
 
 const takeTurn = (guess, round) => {
   const feedback = evaluateGuess(guess, round.currentCard.correctAnswer)
@@ -22,7 +27,8 @@ return announcement;
 }
 
 module.exports = {
-takeTurn,
-calculatePercentCorrect, 
-endRound
+  evaluateGuess,
+  takeTurn,
+  calculatePercentCorrect, 
+  endRound
 }
