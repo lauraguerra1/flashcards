@@ -1,58 +1,60 @@
-# FlashCards Starter Kit
+# FlashCards 
 
-## Fork This Repo
+## Abstract: 
 
-On the top right corner of this page, click the **Fork** button.
+This console playable game provides a set of flashcards and functionality to choose answers for the questions. The inital production data set contains questions about javascript. However, the functions in this codebase were set up dynamically in order to allow for other study topics. To further represent this functionality an extension was added to the projects MVP - the `fetch` method was used to call a REST API with trivia questions about celebrities. The game can also be played with that varying data. Testing was implemented with the Mocha framework and Chai library. 
 
-## Setup
+<div align="center">
+<b>Built With:</b>
+<br>
+Javascript
+<br>
+<em>Additional Technologies:</em>
+<br>
+ Mocha & Chai  | REST API
 
-Clone down the forked repo (from your GitHub). Since you don't want to name your project "flashcards-starter", you can use an optional argument when you run `git clone` (you replace the `[...]` with the terminal command arguments):
+</div>
 
-```bash
-git clone [remote-address] [what you want to name the repo]
-```
+## Installation Instructions 
 
-Once you have cloned the repo, change into the directory and install the library dependencies using the command:
-
-```bash
-npm install
-```
-
-To verify that it is setup correctly, run `npm test` in your terminal. You should have skipped tests in your `card` test file show up.
-
-Running `node index.js` from the root of your project should result in the following message being displayed in your terminal: 
-
-```bash
-Your project is running...
-```
-
-*Note that you will not need to you run this file until you are running your `game` file in Iteration 3. Prior to that, you should strive to use TDD to drive your code. You should check the functionality of your application by running your tests via `npm test`.*
+- Fork this repository.
+- Copy the SSH key and clone it to your local directory. 
+- `cd` into the repository 
+- run `node index.js` to play the game in the console. 
 
 
-## Where to Add Your Code
+## Preview of App:
+![flash cards gif](./flashcards-gif.gif)
 
-**Create all of your feature code files in the `src` directory.** Use the `module.exports` and `require` syntax to share code across files.
+## Context: 
+- Mod 2, Week 1: 
+  - I am a current student of Turing School of Software & Design. 
+  - Turing is a 7 month program, which offers a total of 4 modules. 
+  - This project was made during the first week of the second module that the program has to offer. 
 
-## How to View Your Code in Action
+- A total of 6-8 hours was spent on this project. 
 
-Once you are working through Iteration 3, you will want to run the `node index.js` command in your terminal to run the game.
+## Contributors: 
+[Laura Garcia Guerra](https://github.com/lauraguerra1)
 
-When the game is functioning appropriately, you will be prompted for each question, have the opportunity to select an answer, and will be given feedback. You will be able to play through the entire deck of cards:
+## Learning Goals:
+- Contribute code to an partially constructed application
+- Follow spec/prompts to make a working application
+- Write modular, reusable code that follows SRP 
+- Implement a robust testing suite using TDD
 
-![flash cards example gif](https://media.giphy.com/media/1zkb1q58eTiTH6D7wc/giphy.gif)
+## Wins & Challenges: 
+   - My overall biggest win was the addition of the extension in which I fetched an API to create flashcards with trivia questions about celebrities. 
 
----
+  - My largest challenge was making sure that the current flashcard being displayed was tied to which turn the user was on. Instead of updating the card for each turn, I wanted the current flash card to be set up dynamically so that on the first turn, the first card in the deck would be displayed, and so on and so forth for the remaining turns and cards. I was able to overcome this challenge through completing some reseach. I familiarized myself with `getter methods` which provided me with access to the values of my `round` object before it had been initialized. Thus the following code in my `createRound` function allowed the current flash card to always be dependent on the round's current turn: 
+  ``` 
+   const round = {
+    deck: deck.cards,
+    get currentCard() {
+      return this.deck[this.turns];
+    },
+    turns: 0,
+    incorrectGuesses:[]
+  }
+  ``` 
 
-## Test Files Organization
-
-Similar to feature code, your test code needs to be put in a specific place for it to run successfully.
-
-**Put all of your test files in the `test` directory.** As a convention, all test filenames should end with `-test.js`. For instance: `card-test.js`.
-
-## Running Your Tests
-
-Run your test suite using the command:
-
-```bash
-npm test
-```
